@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Inquiry | Charity Run 2024</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    nav {
+        background-color: #333;
+        padding: 10px 0;
+        text-align: center; 
+    }
+
+    nav a {
+        display: inline-block;
+        color: #fff;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 17px;
+        margin: 0 10px; 
+    }
+
+    nav a:hover {
+        background-color: #ff7b00;
+        color: #fff;
+    }
+
+    header {
+        text-align: center;
+        position: relative;
+        color: white;
+        padding: 20px 20px;
+        background-color: #ff7b00; 
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    section {
+        padding: 40px 20px;
+        max-width: 800px;
+        margin: 20px auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    form input, form select, form textarea {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .checkbox-group {
+        margin: 10px 0;
+    }
+
+    .checkbox-group input {
+        margin-right: 10px;
+    }
+
+    .button-container {
+        text-align: center;
+    }
+
+    .button-container input, form button {
+        width: 207px;
+        height: 74px;
+        padding: 10px 25px;
+        background-color: #000000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 25px;
+        border-radius: 20px;
+        margin: 0 5px;
+    }
+
+    .button-container input:hover, form button:hover {
+        background-color: #ff7b00;
+    }
+
+    footer .social-media {
+        margin-top: 10px;
+    }
+
+    footer .social-media a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+    }
+
+    footer .social-media a:hover {
+        color: #ff7b00; 
+    }
+
+    footer {
+        background-color: #333;
+        color: #f7f7f7;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: left;
+    }
+
+    .modal-content h3 {
+        color: #ff7b00;
+        text-align: center;
+    }
+
+    .close {
+        cursor: pointer;
+        float: right;
+        font-size: 24px;
+        margin-top: -15px;
+        margin-right: -15px;
+    }
+    </style>
+</head>
+<body>
+    <script>
+        function validateForm() {
+            event.preventDefault();
+
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const eventSelected = document.getElementById("event").value;
+            const message = document.getElementById("message").value;
+            const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked'))
+                .map(checkbox => checkbox.value).join(", ");
+
+            if (!name || !email || !eventSelected || !message || selectedCategories.length === 0) {
+                alert("Please enter the values!");
+                return;
+            }
+            
+            const modalContent = `
+                <h3>Inquiry Information Details</h3>
+                <h4>Congratulation...!!!</h4>
+                <p><strong>Full Name:</strong> ${name}</p>
+                <p><strong>Email Address:</strong> ${email}</p>
+                <p><strong>Interested Event:</strong> ${eventSelected}</p>
+                <p><strong>Category of Inquiry:</strong> ${selectedCategories}</p>
+                <p><strong>Additional Notes/Requests:</strong> ${message}</p>
+            `;
+
+            document.querySelector('.modal-content').innerHTML = modalContent;
+            document.getElementById('successModal').style.display = 'flex';
+        }
+
+        function closeModal(event) {
+            if (event && event.target === document.getElementById('successModal')) {
+                document.getElementById('successModal').style.display = 'none';
+            } else {
+                document.getElementById('successModal').style.display = 'none';
+            }
+
+            function confirmReset() {
+            let confirmation = confirm("Are you sure you want to reset? All inputs will be cleared.");
+            if (confirmation) {
+                document.getElementById("runnerForm").reset();
+            }
+        }
+        }
+    </script>
+
+    <nav>
+        <a href="Homepage.html">Home</a>
+        <a href="Event.html">Event</a>
+        <a href="Info.html">General Information</a>
+        <a href="Participation.html">Participation Information</a>
+        <a href="About.html">About Us</a>
+        <a href="Inquiry.html">Inquiry</a>
+    </nav>
+
+    <header>
+        <h1>Event Inquiry Form</h1>
+    </header>
+
+    <section>
+        <h2>Contact Us</h2>
+        <form id="inquiryForm" onsubmit="return validateForm();">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter Your Name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter Your Email example@email.com">
+            
+            <label for="event">Interested Event:</label>
+            <select id="event" name="event" required>
+                <option value="" disabled selected>Select Your Interested Event</option>
+                <option value="Charity Run 2024">Charity Run 2024</option>
+                <option value="Volunteer Opportunities">Volunteer Opportunities</option>
+                <option value="5km Charity Run">5km Charity Run</option>
+                <option value="10km Charity Run">10km Charity Run</option>
+                <option value="21km Charity Run">21km Charity Run</option>
+                <option value="Fun Activities and Workshops">Fun Activities and Workshops</option>
+                <option value="Health and Wellness Expo">Health and Wellness Expo</option>
+            </select>
+            
+            <label>Category of Inquiry:</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="toJoin" name="category" value="To Join">
+                <label for="toJoin">To Join</label><br>  
+                <input type="checkbox" id="eventActivities" name="category" value="Event Activities">
+                <label for="eventActivities">Event Activities</label><br>
+                <input type="checkbox" id="registrationFees" name="category" value="Registration Fees">
+                <label for="registrationFees">Registration Fees</label><br>
+                <input type="checkbox" id="rulesGuidelines" name="category" value="Rules & Guidelines">
+                <label for="rulesGuidelines">Rules & Guidelines</label><br>
+            </div>
+
+            <label for="message">Detailed Inquiry:</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Type here..."></textarea>
+
+            <div class="button-container">
+                <button type="button" onclick="validateForm()">Submit</button>           
+                <button type="button" onclick="confirmReset()">Cancel</button>
+            </div>
+        </form>
+        
+        <div id="successModal" class="modal" onclick="closeModal(event)">
+            <div class="modal-content" onclick="event.stopPropagation();"> 
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Charity Run. All rights reserved.</p>
+        <div class="social-media">
+            <a href="https://www.facebook.com/truyenkhoa.17062021" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/truyenkhoa/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/Ngtrykh" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>    
+        </footer>
+</body>
+</html>

@@ -1,0 +1,298 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <title>Volunteer Registration | Charity Run 2024</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+
+            nav {
+                background-color: #333;
+                padding: 10px 0;
+                text-align: center; 
+            }
+
+            nav a {
+                display: inline-block;
+                color: #fff;
+                text-align: center;
+                padding: 14px 20px;
+                text-decoration: none;
+                font-size: 17px;
+                margin: 0 10px; 
+            }
+
+            nav a:hover {
+                background-color: #ff7b00;
+                color: #fff;
+            }
+
+            header {
+                text-align: center;
+                color: white;
+                padding: 20px;
+                background-color: #32a852;
+            }
+
+            header h1 {
+                margin: 0;
+            }
+
+            section {
+                padding: 40px 20px;
+                max-width: 800px;
+                margin: 20px auto;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            section h2 {
+                font-size: 28px;
+                margin-bottom: 20px;
+                color: #333;
+                text-align: center;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            form label {
+                margin-bottom: 5px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            form input, form select, form textarea {
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+            .button-container {
+                text-align: center;
+            }
+
+            .button-container input, form button {
+                width: 207px;
+                height: 74px;
+                padding: 10px 25px;
+                background-color: #000000;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+                font-size: 25px;
+                border-radius: 20px;
+                margin: 0 5px;
+            }
+
+            .button-container input:hover, form button:hover {
+                background-color: #2b8f44;
+            }
+
+            footer .social-media {
+                margin-top: 10px;
+            }
+
+            footer .social-media a {
+                margin: 0 10px;
+                color: white;
+                text-decoration: none;
+                font-size: 24px;
+            }
+
+            footer .social-media a:hover {
+                color: #ff7b00;
+            }
+
+            footer {
+                background-color: #333;
+                color: #f7f7f7;
+                text-align: center;
+                padding: 20px;
+                margin-top: 50px;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .modal-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: left;
+            }
+
+            .modal-content h3 {
+                color: #32a852;
+                text-align: center;
+            }
+
+            .close {
+                cursor: pointer;
+                float: right;
+                font-size: 24px;
+                margin-top: -15px;
+                margin-right: -15px;
+            }
+        </style>
+        
+        <script>
+            function validateForm() {
+                event.preventDefault();
+
+                const name = document.getElementById("name").value;
+                const age = document.getElementById("age").value;
+                const gender = document.getElementById("gender").value;
+                const role = document.getElementById("role").value;
+                const tshirt_size = document.getElementById("tshirt-size").value;
+                const email = document.getElementById("email").value;
+                const phone = document.getElementById("phone").value;
+                const availabilityDate = document.getElementById("available-date").value;
+                const availabilityTime = document.getElementById("available-time").value;
+
+                if (!name || !age || !gender || !role || !tshirt_size || !email || !phone || !availabilityDate || !availabilityTime ) {
+                    alert("Please enter the values!");
+                    return;
+                }
+
+                const modalContent = `
+                    <h3>Volunteer Registration Details</h3>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Age:</strong> ${age}</p>
+                    <p><strong>Gender:</strong> ${gender}</p>
+                    <p><strong>Preferred Volunteer Role:</strong> ${role}</p>
+                    <p><strong>T-shirt Size:</strong> ${tshirt_size}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Phone Number:</strong> ${phone}</p>
+                    <p><strong>Available Date:</strong> ${availabilityDate}</p>
+                    <p><strong>Available Time:</strong> ${availabilityTime}</p>`;
+
+                document.querySelector('.modal-content').innerHTML = modalContent;
+                document.getElementById('successModal').style.display = 'flex';
+            }
+
+            function closeModal(event) {
+                if (event && event.target === document.getElementById('successModal')) {
+                    document.getElementById('successModal').style.display = 'none';
+                } else {
+                    document.getElementById('successModal').style.display = 'none';
+                }
+            }
+
+            function confirmReset() {
+                let confirmation = confirm("Are you sure you want to reset? All inputs will be cleared.");
+                if (confirmation) {
+                    document.getElementById("runnerForm").reset();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <nav>
+            <a href="Homepage.html">Home</a>
+            <a href="Event.html">Event</a>
+            <a href="Info.html">General Information</a>
+            <a href="Participation.html">Participation Information</a>
+            <a href="About.html">About Us</a>
+            <a href="Inquiry.html">Inquiry</a>
+        </nav>
+
+        <header>
+            <h1>Volunteer Registration</h1>
+            <p>Register now to join the Charity Run 2024 as a volunteer!</p>
+        </header>
+
+        <section>
+            <h2>Volunteer Registration Form</h2>
+            <form id="runnerForm" onsubmit="return validateForm();">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age" placeholder="Enter your age" required>
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="role">Preferred Volunteer Role:</label>
+                <select id="role" name="role" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="Route Marshal">Route Marshal</option>
+                    <option value="Hydration Station Assistant">Hydration Station Assistant</option>
+                    <option value="Check-In Assistant">Check-In Assistant</option>
+                    <option value="Support Team">Support Team</option>
+                </select>
+
+                <label for="tshirt-size">T-Shirt Size:</label>
+                <select id="tshirt-size" name="tshirt-size" required>
+                    <option value="" disabled selected>Select t-shirt size</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+                <label for="available-date">Available Date:</label>
+                <input type="date" id="available-date" name="available-date" required>
+
+                <label for="available-time">Available Time:</label>
+                <input type="time" id="available-time" name="available-time" required>
+
+                <div class="button-container">
+                    <button type="button" onclick="validateForm()">Register</button>           
+                    <button type="button" onclick="confirmReset()">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            <p>Charity Run 2024 &copy; All rights reserved.</p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/truyenkhoa.17062021" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/truyenkhoa/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Ngtrykh" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </footer>
+
+        <div id="successModal" class="modal" onclick="closeModal(event)">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+        </div>
+    </body>
+    </html>
